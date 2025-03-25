@@ -1,7 +1,7 @@
 const fetchData= async(searchTerm) => {
     const response = await axios.get('http://omdbapi.com/', {
         params: {
-            apikey:'30668e4a',
+            apikey:'e806f5e',
             s: 'avengers'
 
         }
@@ -66,4 +66,44 @@ const onInput = async(event) => {
     })
     resultsWrapper.appendChild(option)
     }
+}
+
+input.addEventListener('input',debonce(onInput, 1000))
+
+document.addEventListener('click',event => {
+    if(!root,contains(event.target)){
+        dropdown.classList.remove('is-active')
+    }
+})
+
+const onMovieSelect = async (movie) => {
+    const response = await axios.get('http://www.omdbapi.com/',{
+        params: {
+            apikey: '',
+            i: movie.imdbID
+        }
+    })
+
+    console.log(response.data)
+    document.querySelector('#summary').innerHTML = movieTemplate(response.data)
+
+}
+
+const movieTemplate = (movieDetail) => {
+    return `
+    <article class="media">
+     <figure class=""media-left">
+        <p class="image">
+            <img src="${movieDetail.Poster}" />
+        </p>
+     </figure>
+     <div class="media-content">
+        <div class="content">
+            <h1>${movieDetail.Title}</h1>
+            <h1>${movieDetail.Genre}</h1>
+            <h1>${movieDetail.Plot}</h1>
+        </div>
+     </div>
+    </article>
+    `
 }
