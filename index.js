@@ -106,6 +106,26 @@ const runComparasion = () => {
     })
 }
  
+const movieTemplates = (movieDetails) =>{
+    //Transformar a numeros los strings que llevan los datos
+    const dollars = parseInt(movieDetails.BoxOffice.replace(/\$/g,'').replace(/,/g,''))
+    console.log(dollars)
+    const metascore = parseInt(movieDetails.Metascore)
+    const imdbRating = parseFloat(movieDetails.imdbRating)
+    const imdbvotes = parseInt(movieDetails.indbvotes.replace(/,/g,''))
+    console.log(metascore, imdbRating, imdbvotes)
+    const awards = movieDetails.awards.split('').reduce((prev,word) => {
+        const value = parseInt(word)
+        if(isNaN(value)){
+            return prev
+        }else{
+            return prev + value
+        }
+        
+    },0)
+    console.log('Awards', award)
+}
+
 const root = document.querySelector('.autocomplete')
 root.innerHTML = `
     <label><b> Busqueda de Peliculas </b></label>
