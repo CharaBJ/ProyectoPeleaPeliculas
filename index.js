@@ -1,102 +1,102 @@
-// const fetchData= async(searchTerm) => {
-//     const response = await axios.get('http://omdbapi.com/', {
-//         params: {
-//             apikey:'e806f5e',
-//             s: 'avengers'
-
-//         }
-//     })
-//     if(response.data.Error){
-//         return[]
-//     }
-
-//     console.log(response.data.Search)
-// }
-
+/* const fetchData = async(searchTerm) => {
+    const response = await axios.get("https://omdbapi.com/",{
+        params: {
+        apikey:"e806f5e",
+        s: "avengers"
+        }
+    })
+    if(response.data.Error){
+        return[]
+    }
+    console.log(response.data)
+    console.log(response.data)
+    return response.data.Search
+} */
 //fetchData()
-AutocompleteConfig = {
+
+autocompleteConfig = {
     renderOption(movie){
         const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster
-        return`
-        <img src="${imgSrc}" />
-        ${movie.Title} (${movie-Year})
+        return `
+            <img src = "${imgSrc}"/>
+            ${movie.Title} (${movie.Year})
         `
     },
     inputValue(movie){
         return movie.Title
     },
-    async fetchData(searchTerm){
-        apiMovieURL = 'http://www.omdbapi.com/'
-        const response = await axios.get(apiMovieURL,{
-            params: {
-                apikey: '',
-                s: searchTerm
-            }
+    async fetchData(searchTerm) {
+        apiMovieURL = 'https://omdbapi.com/'
+        const response = await axios.get(apiMovieURL, {
+            params: 'e806f5e',
+            s: searchTerm
         })
         if(response.data.Error){
             return []
         }
+
         console.log(response.data)
-        return responde.data.seach
+        return response.data.Search
     }
 }
-createAutocomplete({
-    ...AutocompleteConfig,
+
+createAutoComplete({
+    ...autocompleteConfig,
     root: document.querySelector('#left-autocomplete'),
     onOptionSelect(Movie){
-        document.querySelector('.tutorial').classList.add('is.hidden')
-
-        onMovieSelect(movie,document.querySelector('#left-summary'),'left')
-    }
-})
-
-createAutocomplete({
-    ...AutocompleteConfig,
-    root: document.querySelector('#right-autocomplete'),
-    onOptionSelect(movie){
         document.querySelector('.tutorial').classList.add('is-hidden')
-        onMovieSelect(movie,document.querySelector('#right-summary'),'right')
+        onMovieSelect(movie, document.querySelector('#left-summery'), 'left')
     }
 })
 
-//Crear dos variables para leftMovie y rightMovie
+createAutoComplete({
+    ...autocompleteConfig,
+    root: document.querySelector('#right-autocomplete'),
+    onOptionSelect(Movie){
+        document.querySelector('.tutorial').classList.add('is-hidden')
+        onMovieSelect(movie, document.querySelector('#right-summery'), 'right')
+    }
+})
+
+//Crear dos variables para left Movie y right Movie
+
 let leftMovie
 let rightMovie
 
-const onMoviesSelect = async(movie, summaryElement, side) => {
-    const response = await axios.get('http://www.omdbapi.com/', {
+const onMovieSelect = async (movie,summaryElement, side) => {
+    const response = await axios.get("https://omdbapi.com/",{
         params: {
-            apikey: '',
+            apikey: 'e806f5e',
             i: movie.imbID
         }
     })
     console.log(response.data)
     summaryElement.innerHTML = movieTemplate(response.data)
-//Preguntamos cual lado es?
-    if(side === 'left'){
-        ñeftMovie = response.data
-    }else{
-        rightMovie = responde.data
-    }
 
-    //Preguntamos is tenemos amvos lados
+    //Preguntame cual lado es
+    if(side === 'left'){
+        leftMovie = response.data
+    }else{
+        rightMovie = response.data
+    }
+    //Preguntamos si tenemos ambos lados
     if(leftMovie && rightMovie){
-        //Entonces ejecutamos la funcion de comparacion
-        runComparison()
+        // Entonces ejecutamos la funcion comparacion
+        runComparasion()
     }
 }
 
-const runComparison = () => {
-    console.log('Comparacion de peliculas')
+const runComparasion = () => {
+    console.log('Comparasion de peliculas')
     const leftSideStats = document.querySelectorAll('#left-summary .notification')
     const rightSideStats = document.querySelectorAll('#right-summary .notification')
 
-    leftSideStats.forEach((leftStat,index) => {
-        const rightStat = rightSideStats[index]
+    leftSideStats.forEach((leftStat, index) => {
+        const rightStat = rightSideStats(index)
         const leftSideValue = parseInt(leftStat.dataset.value)
         const rightSideValue = parseInt(rightStat.dataset.value)
 
-        if(rightSideValue = leftSideValue){
+        if(rightSideValue > leftSideValue){
             leftStat.classList.remove('is-primary')
             leftStat.classList.add('is-danger')
         }else{
@@ -105,98 +105,96 @@ const runComparison = () => {
         }
     })
 }
-
-
+ 
 const root = document.querySelector('.autocomplete')
 root.innerHTML = `
-<label><b>Busqueda de Peliculas</b></label>
-<input class="input"/>
-<div class="dropdown">
-    <div class="dropdown-menu">
-        <div class="dropdown-content results"></div>
+    <label><b> Busqueda de Peliculas </b></label>
+    <input class = "input" />
+    <div class = "dropdown">
+        <div class = "dropdown-menu">
+            <div class = "dropdown-content results"></div>
         </div>
     </div>
-    `
-const input= document.querySelector("input")
-const dropdown = document.querySelector('.dropdown')
-const resultsWrapper = document.querySelector('.results')
+`
+const input = document.querySelector("inputs")
+const dropdown = document.querySelector(".dropdown")
+const resultsWeapper = document.querySelector(".results")
 
-const debonce = (func, delay = 1000) =>{
+const debonce = (func, delay = 1000) => {
     let timeoutId
-    return(...args) => {
+    return(...arg) => {
         clearTimeout(timeoutId)
-        timeoutId = serTimeout(() =>{
-            func.apply(null, args)
-        }, deLay)
+        timeoutId = setTimeout(() => {
+            func.apply(null, arg)
+        }, delay)
     }
 }
 
 const onInput = async(event) => {
-    const movies = await fetchData(event.target.value)
-    console.log("MOVIES:", movies)
-
-    if(!movies.length) {
-        dropdown.classList.remove('is-active')
+    const movies = await fetchData(event.target.values)
+    console.log("MOVIES: ",movies)
+    
+    if(!movies.length){
+        dropdown.classList.remove('is-activate')
         return
     }
+    resultsWeapper.innerHTML = ''
+    dropdown.classList.add('is-activate')
 
-    resultsWrapper.innerHTML = ''
-    dropdown.classList.add('is-active')
-
-    for(let movie of movies){
+    for (let movie of movies){
         const option = document.createElement('a')
-        const imgSrc = movie.Poster === 'N/A' ? '': movie.Poster
+        const imgSrc = movie.Poster === "N/A" ? '': movie.Poster
 
         option.classList.add('dropdown-item')
         option.innerHTML = `
-        <img src="${imgSrc}"/>
-        ${movie.Title}
-    `
-    option.addEventListener('click', () =>{
-        dropdown.classList.remove('is-active')
-        input.value = movie.Title
-        onMovieSelect(movie)
-    })
-    resultsWrapper.appendChild(option)
+            <img src="${imgSrc}" />
+            ${movie.Title}
+        `
+        option.addEventListener('click', () => {
+            dropdown.classList.remove('is-activate')
+            input.value = movie.Title
+            onMoviesSelect(movie)
+        })
+        resultsWeapper.appendChild(option)
     }
 }
 
-input.addEventListener('input',debonce(onInput, 1000))
+input.addEventListener('input', debonce(onInput, 1000))
 
-document.addEventListener('click',event => {
-    if(!root,contains(event.target)){
-        dropdown.classList.remove('is-active')
+document.addEventListener('click', event => {
+    if(!root.contains(event.target)){
+        dropdown.classList.remove('is-activate')
     }
 })
 
-const onMovieSelect = async (movie) => {
-    const response = await axios.get('http://www.omdbapi.com/',{
+const onMoviesSelect = async(movie) => {
+    const response = await axios.get('http://www.omdbapi.com/', {
         params: {
-            apikey: '',
-            i: movie.imdbID
+            apikey: 'e806f5e',
+            i: movie.imbID
         }
     })
 
     console.log(response.data)
-    document.querySelector('#summary').innerHTML = movieTemplate(response.data)
-
+    document.querySelector('summary').innerHTML = movieTemplate(response.data)
 }
 
-const movieTemplate = (movieDetail) => {
+const movieTemplate = (movieData1) => {
     return `
-    <article class="media">
-     <figure class=""media-left">
-        <p class="image">
-            <img src="${movieDetail.Poster}" />
-        </p>
-     </figure>
-     <div class="media-content">
-        <div class="content">
-            <h1>${movieDetail.Title}</h1>
-            <h1>${movieDetail.Genre}</h1>
-            <h1>${movieDetail.Plot}</h1>
-        </div>
-     </div>
-    </article>
+        <articule class="media">
+            <figure class="media-left">
+                <p class="image">
+                    <img src="${movieData1.Poster}" />
+                </p>
+            </figure>
+            <div class = ""media-content">
+                <div class="content">
+                    <h1>${movieData1.Title}</h1>
+                    <h4>${movieData1.Genre}</h4>
+                    <p>${movieData1.Plot}</p> 
+                </div>
+            </div>    
+        </articule>
+    
     `
 }
