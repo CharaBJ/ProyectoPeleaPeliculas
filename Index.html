@@ -11,21 +11,34 @@
 </head>
 <body>
     <section class="hero is-primary is-bold">
-     <div class="hero-body">
-        <div class="container">
-            <h1 class="title">
-                Pelea de peliculas
-                <span class="icon">
-                    <i class="fas fa-film"></i>
-                </span>
-            </h1>
+        <div class="hero-body">
+            <div class="conteiner">
+                <div class="title">
+                    Pelea De Peliculas
+                    <span class="icon">
+                        <i class="fas fa-film"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <div class="conteiner">
+        <div class="column">
+            <div class="column">
+                <div id="left-autocomplete"></div>
+                <div id="left-summary"></div>
+                </div>
+                <div class="column">
+                    <div id="right-autocomplete"></div>
+                    <div id="right-summary"></div>
+                    </div>
+            </div>
+            <div class="column is-half notification is-dark tutorial">
+                <h1 class="title">Busca peliculas en ambos lados</h1>
+                <p class="subtitle">Nosotros te diremos cual es la mejor!</p>
+            </div>
         </div>
-     </div>
-     </section>
-     <div class="container">
-        <div class="autocomplete"></div>
-     </div>
-
-     <script src="index.js"></script>
+        <script src="autocomplete.js"></script>
+        <script src="index.js"></script>
 </body>
 </html>
