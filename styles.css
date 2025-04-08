@@ -1,44 +1,43 @@
-.tutorial{
+.tutorial {
     width: 600px;
     text-align: center;
-    margin: auto;
+    margin: auto
 }
 
-figure.imagen{
+figure.image {
     display: flex;
     justify-content: center;
     background-color: black;
 }
 
-figure.image img{
+figure .image img {
     width: 128px;
 }
 
-.notificacion{
+.notification {
     margin-top: 20px !important;
 }
 
-.title .icon{
+.title .icon {
+    margin-left: 15px;
+}
+
+.hero {
     margin-bottom: 15px;
 }
 
-.hero{
-    margin-bottom: 20px;
-}
-
-.forms{
+.forms {
     display: flex;
     justify-content: space-around;
 }
 
-.dropdown-item{
+.dropdown-item {
     display: flex;
     align-items: center;
     height: 60px;
 }
 
-.dropdown-item img{
+.dropdown-item img {
     height: 50px;
     margin-right: 10px;
 }
-

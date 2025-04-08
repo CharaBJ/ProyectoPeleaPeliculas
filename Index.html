@@ -6,39 +6,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <title>Pelea de peliculas</title>
 </head>
 <body>
     <section class="hero is-primary is-bold">
         <div class="hero-body">
-            <div class="conteiner">
-                <div class="title">
-                    Pelea De Peliculas
+            <div class="container">
+                <h1 class="title">
+                    Pelea De peliculas
                     <span class="icon">
                         <i class="fas fa-film"></i>
-                        </span>
-                    </div>
-                </div>
+                    </span>
+                </h1>
             </div>
+        </div>
     </section>
-    <div class="conteiner">
-        <div class="column">
+    <div class="container">
+        <div class="columns">
             <div class="column">
                 <div id="left-autocomplete"></div>
                 <div id="left-summary"></div>
-                </div>
-                <div class="column">
-                    <div id="right-autocomplete"></div>
-                    <div id="right-summary"></div>
-                    </div>
             </div>
-            <div class="column is-half notification is-dark tutorial">
-                <h1 class="title">Busca peliculas en ambos lados</h1>
-                <p class="subtitle">Nosotros te diremos cual es la mejor!</p>
+            <div class="column">
+                <div id="right-autocomplete"></div>
+                <div id="right-summary"></div>
             </div>
         </div>
-        <script src="autocomplete.js"></script>
-        <script src="index.js"></script><p>
+        <div class="column is-half notification is-dark tutorial">
+            <h1 class="title">Busca peliculas en ambos lados</h1>
+            <p class="subtitle">Nosotros te diremos cual es la mejor!</p>
+        </div>
+    </div>
+    <script src="autocomplete.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
